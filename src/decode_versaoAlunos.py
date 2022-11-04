@@ -23,7 +23,8 @@ def main():
         '7': [852, 1209], '8': [852, 1336], '9': [852, 1477], 'C': [852, 1633],
         'X': [941, 1209], '0': [941, 1336], '#': [941, 1477], 'D': [941, 1633]
     }
-    SINAL = signalMeu()
+
+    SINAL = signalMeu() 
     sd.default.samplerate = 44100
     sd.default.channels = 2
     duration = 3
@@ -44,9 +45,6 @@ def main():
     sd.wait()
     print("...     FIM")
 
-
-        
-    
     tempo = np.linspace(0.0, duration, duration*freqDeAmostragem)
     x,y = SINAL.calcFFT(audio[:,0],freqDeAmostragem)
 
@@ -68,6 +66,7 @@ def main():
     f1,f2 = SINAL.picos(index,x)              
     
     teclas = list(DTMF.keys())
+    
     sons = list(DTMF.values())  
 
     resposta = SINAL.detecta_tecla(teclas,sons,f1,f2)

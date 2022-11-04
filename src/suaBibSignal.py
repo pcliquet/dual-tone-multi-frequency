@@ -72,18 +72,17 @@ class signalMeu:
         f1 = 0
         f2 = 0
         for pico in picks:
-            for value in freq_baixas:
-                if value-tolerancia < pico < value+tolerancia:
-                    f1 = value
-            for value2 in freq_altas:
-                if value2-tolerancia < pico < value2+tolerancia:
-                    f2 = value2
+            for pico1 in freq_baixas:
+                if pico1-tolerancia < pico < pico1+tolerancia:
+                    f1 = pico1
+            for pico2 in freq_altas:
+                if pico2-tolerancia < pico < pico2+tolerancia:
+                    f2 = pico2
         return f1,f2
 
     def detecta_tecla(self, teclas,sons,f1,f2):
         for t in sons:
-        # print([int(f1),int(f2)])
             if [int(f1),int(f2)] in sons:
                 tec = sons.index([f1,f2])
-                
+
         return teclas[tec]
