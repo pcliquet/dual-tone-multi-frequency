@@ -55,3 +55,35 @@ class signalMeu:
         plt.figure()
         plt.plot(x, np.abs(y))
         plt.title('Fourier')
+
+    def picos(self,index,x):
+
+        freq_baixas = [697,770,852,941]
+        freq_altas = [1209,1336,1477,1633]
+
+        picks = []
+        for freq in x[index]:
+            picks.append(freq)
+
+
+
+        tolerancia = 50
+
+        f1 = 0
+        f2 = 0
+        for pico in picks:
+            for value in freq_baixas:
+                if value-tolerancia < pico < value+tolerancia:
+                    f1 = value
+            for value2 in freq_altas:
+                if value2-tolerancia < pico < value2+tolerancia:
+                    f2 = value2
+        return f1,f2
+
+    def detecta_tecla(self, teclas,sons,f1,f2):
+        for t in sons:
+        # print([int(f1),int(f2)])
+            if [int(f1),int(f2)] in sons:
+                tec = sons.index([f1,f2])
+                
+        return teclas[tec]

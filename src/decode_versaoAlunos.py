@@ -45,9 +45,6 @@ def main():
     print("...     FIM")
 
 
-    freq_baixas = [697,770,852,941]
-    freq_altas = [1209,1336,1477,1633]
-
         
     
     tempo = np.linspace(0.0, duration, duration*freqDeAmostragem)
@@ -67,36 +64,16 @@ def main():
     index = peakutils.indexes(y, thres=0.4, min_dist=50)
     print(f"index de picos {index}") #yf é o resultado da transformada de fourier
 
-    picks = []
-    for freq in x[index]:
-        picks.append(freq)
 
-
-
-    tolerancia = 50
-
-    f1 = 0; f2 = 0
-    for pico in picks:
-        for value in freq_baixas:
-            if value-tolerancia < pico < value+tolerancia:
-                f1 = value
-        for value2 in freq_altas:
-            if value2-tolerancia < pico < value2+tolerancia:
-                f2 = value2
-                
-      
+    f1,f2 = SINAL.picos(index,x)              
+    
     teclas = list(DTMF.keys())
     sons = list(DTMF.values())  
 
+    resposta = SINAL.detecta_tecla(teclas,sons,f1,f2)
 
 
-    for t in sons:
-        # print([int(f1),int(f2)])
-        if [int(f1),int(f2)] in sons:
-            tec = sons.index([f1,f2])
-
-
-    print(f'a tecla pressionada foi: {teclas[tec]}')
+    print(f'a tecla pressionada foi: {resposta}')
 
 
   
